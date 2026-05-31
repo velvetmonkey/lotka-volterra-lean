@@ -3,17 +3,17 @@
 [![Lean 4](https://img.shields.io/badge/Lean-4.28.0-blue)](https://lean-lang.org/)
 [![Mathlib](https://img.shields.io/badge/Mathlib-v4.28.0-purple)](https://github.com/leanprover-community/mathlib4)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Proofs](https://img.shields.io/badge/proofs-pending-lightgrey)](LotkaVolterra)
+[![Proofs](https://img.shields.io/badge/proofs-12%20proved%20%2F%200%20sorry-brightgreen)](LotkaVolterra)
 
-Lean 4 formal proofs of Lotka-Volterra predator-prey dynamics: Hamiltonian conservation, fixed points, and positive invariance.
+Lean 4 formal proofs of Lotka-Volterra predator-prey dynamics: Hamiltonian conservation, fixed points, positive invariance, and boundedness.
 
-**Zero sorry statements.**
+**12 declarations. Zero sorry statements.**
 
 ## Why it matters
 
 The Lotka-Volterra equations are one of the foundational models of mathematical biology, appearing in ecology, economics, epidemiology, and game theory. Their key property is a conserved Hamiltonian: trajectories in the positive quadrant are closed orbits around an interior fixed point. Unlike gradient descent or Hopfield networks, there is no convergence to a fixed point -- the system is conservative, not dissipative.
 
-This library machine-checks the conservation law and supporting results in Lean 4, giving a verified foundation for reasoning about Hamiltonian dynamical systems.
+This library machine-checks the conservation law, fixed point uniqueness, positive invariance, and Hamiltonian lower bound in Lean 4 via HasDerivAt composition and Mathlib's Real.log infrastructure.
 
 ## Model
 
@@ -22,34 +22,44 @@ dx/dt = α*x - β*x*y
 dy/dt = δ*x*y - γ*y
 ```
 
-Parameters: α, β, γ, δ : ℝ, all strictly positive. State: (x, y) with x > 0, y > 0.
+Parameters: `Params` structure with α, β, γ, δ : ℝ all strictly positive.
 
 Hamiltonian: H(x, y) = δ*x - γ*ln(x) + β*y - α*ln(y)
 
-## Planned project structure
+## Project structure
 
 ```
 LotkaVolterra/
-├── Defs.lean          — ODE vector field, parameters, Hamiltonian definition
-├── Conservation.lean  — dH/dt = 0 along trajectories
-├── FixedPoints.lean   — Interior fixed point (γ/δ, α/β)
-└── Boundedness.lean   — H bounded below on positive quadrant
+├── Defs.lean          — Params, vector field (dx, dy), IsSolution, Hamiltonian H
+├── FixedPoints.lean   — Interior fixed point existence and uniqueness
+├── Conservation.lean  — Conservation law: dH/dt = 0 along trajectories
+└── Boundedness.lean   — H bounded below, positive invariance, log-derivative structure
+LotkaVolterra.lean     — Root module importing all four
 ```
 
-## Planned theorem inventory
+## Theorem inventory
 
-| # | Theorem | Statement |
-|---|---------|-----------|
-| 1 | `lv_fixed_point` | Interior fixed point exists at (γ/δ, α/β) |
-| 2 | `hamiltonian_conservation` | dH/dt = 0 along trajectories |
-| 3 | `positive_invariance` | x > 0 and y > 0 is preserved under the flow |
-| 4 | `hamiltonian_bounded_below` | H is bounded below on the positive quadrant |
+| # | Name | Statement |
+|---|------|-----------|
+| 1 | `fixed_point_dx` | Vector field dx vanishes at (γ/δ, α/β) |
+| 2 | `fixed_point_dy` | Vector field dy vanishes at (γ/δ, α/β) |
+| 3 | `fixed_point_unique` | (γ/δ, α/β) is the only positive equilibrium |
+| 4 | `conservation_law` | HasDerivAt (fun t => H(x t, y t)) 0 t for every t |
+| 5 | `dx_zero_on_axis` | x = 0 implies x' = 0 (x-axis invariant) |
+| 6 | `dy_zero_on_axis` | y = 0 implies y' = 0 (y-axis invariant) |
+| 7 | `log_prey_deriv` | d/dt[ln x] = α - β*y |
+| 8 | `log_pred_deriv` | d/dt[ln y] = δ*x - γ |
+| 9 | `linear_minus_log_bound` | a*x - b*ln x ≥ b*(1 + ln(a/b)) for x, a, b > 0 |
+| 10 | `H_bounded_below` | H(x,y) ≥ γ(1 + ln(δ/γ)) + α(1 + ln(β/α)) on positive quadrant |
+| 11 | `H_bdd_below` | Existential form of the lower bound |
+| 12 | `positive_invariance` | Positive quadrant is forward-invariant under the flow |
 
 ## Key technical highlights
 
-- Conservative system: no attractor, no convergence -- orbits are closed curves
-- Hamiltonian conservation proved via chain rule and direct cancellation, no ODE trajectory theory needed for the algebraic identity
-- Standard axioms only: `propext`, `Classical.choice`, `Quot.sound`
+- Conservation law proved by composing `HasDerivAt` lemmas for each term of H and showing the derivative simplifies to zero
+- `linear_minus_log_bound` derived from `Real.log_le_sub_one_of_pos` -- the key algebraic fact behind Hamiltonian boundedness
+- Conservative system: no attractor, no convergence -- orbits are closed curves in the positive quadrant
+- All 12 declarations verified via `#print axioms`: only `propext`, `Classical.choice`, `Quot.sound`
 - Zero `sorry`, zero `admit`
 
 ## Dependencies
@@ -60,6 +70,10 @@ LotkaVolterra/
 ## Paper
 
 Companion paper forthcoming. To be published on Zenodo.
+
+## Cite
+
+Zenodo DOI forthcoming.
 
 ## Related work
 
