@@ -4,6 +4,7 @@
 [![Mathlib](https://img.shields.io/badge/Mathlib-v4.28.0-purple)](https://github.com/leanprover-community/mathlib4)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Proofs](https://img.shields.io/badge/proofs-12%20proved%20%2F%200%20sorry-brightgreen)](LotkaVolterra)
+[![Paper](https://img.shields.io/badge/Zenodo-20474669-blue)](https://zenodo.org/records/20474669)
 
 Lean 4 formal proofs of Lotka-Volterra predator-prey dynamics: Hamiltonian conservation, fixed points, positive invariance, and boundedness.
 
@@ -69,11 +70,13 @@ LotkaVolterra.lean     — Root module importing all four
 
 ## Paper
 
-Companion paper forthcoming. To be published on Zenodo.
+**lotka-volterra-lean: Formal Proofs of Hamiltonian Conservation and Positive Invariance in Lean 4**  
+Ben Cassie (2026). Zenodo.  
+https://zenodo.org/records/20474669
 
 ## Cite
 
-Zenodo DOI forthcoming.
+Cassie, B. (2026). *lotka-volterra-lean: Formal Proofs of Hamiltonian Conservation and Positive Invariance in Lean 4*. Zenodo. https://zenodo.org/records/20474669.
 
 ## Related work
 
