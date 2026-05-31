@@ -69,6 +69,10 @@ Companion paper forthcoming. To be published on Zenodo.
 - [contraction-lean](https://github.com/velvetmonkey/contraction-lean) — Lean 4 contraction theory
 - [nesterov-lean](https://github.com/velvetmonkey/nesterov-lean) — Lean 4 Nesterov accelerated gradient descent
 
+## Acknowledgements
+
+Proofs in this library were generated using [Aristotle](https://aristotle.harmonic.fun), an AI proof assistant for Lean 4 and Mathlib. The proof discipline -- zero sorry, every Mathlib lemma name `#check`ed before use -- was specified by the author and enforced by the Lean type checker.
+
 ## Author
 
 Ben Cassie · [@thevelvetmonke](https://x.com/thevelvetmonke)
