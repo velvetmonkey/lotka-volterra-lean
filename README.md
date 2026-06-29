@@ -3,7 +3,7 @@
 [![Lean 4](https://img.shields.io/badge/Lean-4.28.0-blue)](https://lean-lang.org/)
 [![Mathlib](https://img.shields.io/badge/Mathlib-v4.28.0-purple)](https://github.com/leanprover-community/mathlib4)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Proofs](https://img.shields.io/badge/proofs-12%20proved%20%2F%200%20sorry-brightgreen)](LotkaVolterra)
+[![Proofs](https://img.shields.io/badge/proofs-11%20proved%20%2F%200%20sorry-brightgreen)](LotkaVolterra)
 [![Paper](https://img.shields.io/badge/Zenodo-20474669-blue)](https://zenodo.org/records/20474669)
 
 Lean 4 formal proofs of Lotka-Volterra predator-prey dynamics: Hamiltonian conservation, fixed points, positive invariance, and boundedness.
@@ -53,7 +53,6 @@ LotkaVolterra.lean     — Root module importing all four
 | 9 | `linear_minus_log_bound` | a*x - b*ln x ≥ b*(1 + ln(a/b)) for x, a, b > 0 |
 | 10 | `H_bounded_below` | H(x,y) ≥ γ(1 + ln(δ/γ)) + α(1 + ln(β/α)) on positive quadrant |
 | 11 | `H_bdd_below` | Existential form of the lower bound |
-| 12 | `positive_invariance` | Positive quadrant is forward-invariant under the flow |
 
 ## Key technical highlights
 
