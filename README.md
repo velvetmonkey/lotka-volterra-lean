@@ -1,5 +1,6 @@
 # lotka-volterra-lean
 
+[![thread](https://img.shields.io/badge/%F0%9F%A7%B5-how%20it%20works-1DA1F2)](https://x.com/thevelvetmonke)
 [![Lean 4](https://img.shields.io/badge/Lean-4.28.0-blue)](https://lean-lang.org/)
 [![Mathlib](https://img.shields.io/badge/Mathlib-v4.28.0-purple)](https://github.com/leanprover-community/mathlib4)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -10,7 +11,15 @@ Lean 4 formal proofs of Lotka-Volterra predator-prey dynamics: Hamiltonian conse
 
 **12 declarations. Zero sorry statements.**
 
-## Why it matters
+## What this is, and why it matters
+
+This library formalizes core facts about the classical Lotka-Volterra predator-prey equations. Its headline theorem, `LotkaVolterra.conservation_law`, proves that the derivative of the logarithmic Hamiltonian is zero along every strictly positive classical solution.
+
+The result captures why this system is conservative rather than dissipative. The proof differentiates each term of the Hamiltonian, substitutes the prey and predator differential equations, and verifies exact cancellation. Other declarations identify the unique positive equilibrium and bound the Hamiltonian below on the positive quadrant.
+
+The conservation theorem assumes a solution on all real times and assumes both components remain strictly positive. It does not establish existence, uniqueness, or positivity of solutions. A zero derivative supplies the conservation law, but the library does not itself prove that every positive trajectory is a closed periodic orbit.
+
+## Background and motivation
 
 The Lotka-Volterra equations are one of the foundational models of mathematical biology, appearing in ecology, economics, epidemiology, and game theory. Their key property is a conserved Hamiltonian: trajectories in the positive quadrant are closed orbits around an interior fixed point. Unlike gradient descent or Hopfield networks, there is no convergence to a fixed point -- the system is conservative, not dissipative.
 
